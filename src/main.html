@@ -1,89 +1,38 @@
-<button (click)="generateRules()">Generate Rule</button>
-
 <div class="rule-definition">
+  <ng-container *ngTemplateOutlet="groupTemplate; context: { $implicit: group, parent: null, index: -1 }"></ng-container>
+</div>
+
+<ng-template #groupTemplate let-group let-parent="parent" let-index="index">
   <div class="group">
     <div class="options">
       <div class="option-absolute">
-        <select>
+        <select [(ngModel)]="group.condition">
           <option value="ALL">ALL</option>
-          <option value="ANY" selected>ANY</option>
+          <option value="ANY">ANY</option>
         </select>
-        <button (click)="addGroup($event)">Add Group</button>
-        <button (click)="addRule($event)">Add Rule</button>
-        <button (click)="removeGroup($event)">Remove</button>
+        <input type="button" class="insert-group" value="Add Group" (click)="addGroup(group)">
+        <input type="button" class="insert-rule" value="Add Rule" (click)="addRule(group)">
+        <input *ngIf="parent" type="button" class="remove-group" value="Remove" (click)="removeRule(parent, index)">
         <button class="drag-handler">↑↓</button>
       </div>
     </div>
     <div class="group-container">
-      <div class="group">
-        <div class="options">
-          <div class="option-absolute">
-            <select>
-              <option value="ALL">ALL</option>
-              <option value="ANY" selected>ANY</option>
-            </select>
-            <button (click)="addGroup($event)">Add Group</button>
-            <button (click)="addRule($event)">Add Rule</button>
-            <button (click)="removeGroup($event)">Remove</button>
-            <button class="drag-handler">↑↓</button>
-          </div>
-        </div>
-        <div class="group-container">
-          <div class="group">
-            <div class="options">
-              <div class="option-absolute">
-                <select>
-                  <option value="ALL" selected>ALL</option>
-                  <option value="ANY">ANY</option>
-                </select>
-                <button (click)="addGroup($event)">Add Group</button>
-                <button (click)="addRule($event)">Add Rule</button>
-                <button (click)="removeGroup($event)">Remove</button>
-                <button class="drag-handler">↑↓</button>
-              </div>
-            </div>
-            <div class="group-container"></div>
-          </div>
+      <div *ngFor="let rule of group.rules; let i = index">
+        <ng-container *ngIf="isGroup(rule); else ruleTemplate">
+          <ng-container *ngTemplateOutlet="groupTemplate; context: { $implicit: rule, parent: group, index: i }"></ng-container>
+        </ng-container>
+        <ng-template #ruleTemplate>
           <div class="rule">
             FactName
-            <select class="dropdown">
+            <select [(ngModel)]="rule.operator">
               <option>Operator</option>
             </select>
-            <input type="text" value="Value" />
-            <button (click)="removeRule($event)">Remove</button>
+            <input type="text" [(ngModel)]="rule.value">
+            <input type="button" value="remove" (click)="removeRule(group, i)">
             <button class="drag-handler">↑↓</button>
           </div>
-        </div>
+        </ng-template>
       </div>
-      <!-- Similar structure repeated for nested groups and rules -->
     </div>
   </div>
-</div>
-
-<!-- Group Template -->
-<div class="group-template" style="display: none">
-  <div class="options">
-    <div class="option-absolute">
-      <select>
-        <option value="ALL">ALL</option>
-        <option value="ANY">ANY</option>
-      </select>
-      <button (click)="addGroup($event)">Add Group</button>
-      <button (click)="addRule($event)">Add Rule</button>
-      <button (click)="removeGroup($event)">Remove</button>
-      <button class="drag-handler">↑↓</button>
-    </div>
-  </div>
-  <div class="group-container"></div>
-</div>
-
-<!-- Rule Template -->
-<div class="rule-template" style="display: none">
-  FactName
-  <select class="dropdown">
-    <option>Operator</option>
-  </select>
-  <input type="text" value="Value" />
-  <button (click)="removeRule($event)">Remove</button>
-  <button class="drag-handler">↑↓</button>
-</div>
+</ng-template>

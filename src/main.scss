@@ -7,27 +7,103 @@
   border: 1px solid rgb(212, 218, 218);
   border-radius: 6px;
   background-color: rgb(236, 243, 243);
+
+  .rule {
+    position: relative;
+    padding: 10px;
+    margin: 15px;
+    background-color: #ffffff;
+    border: 1px solid #c5e3c5;
+
+    &::after,
+    &::before {
+      content: '';
+      position: absolute;
+      left: -16px;
+      width: 14px;
+      height: calc(50% + 14px);
+      border-style: solid;
+    }
+
+    &::before {
+      top: -13px;
+      border-width: 0 0 2px 2px;
+    }
+
+    &::after {
+      top: calc(50%);
+      border-width: 0 0 0 2px;
+    }
+
+    &:first-child::before {
+      top: -18px;
+      height: calc(50% + 20px);
+    }
+
+    &:last-child::before {
+      border-radius: 0 0 0 4px;
+    }
+
+    &:last-child::after {
+      display: none;
+    }
+  }
+
+  .dragging {
+    position: fixed;
+    opacity: 0.5;
+    z-index: 100;
+  }
+
+  .rule-placeholder {
+    position: relative;
+    margin: 4px 0;
+    border-radius: 5px;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px dashed #bbb;
+    opacity: 0.7;
+  }
 }
 
 .group-container {
   min-height: 80px;
-}
 
-.rule-definition > .group > .options .remove-group,
-.rule-definition > .group > .options .drag-handler {
-  display: none;
-}
+  .group {
+    &::after,
+    &::before {
+      content: '';
+      position: absolute;
+      left: -11px;
+      width: 9px;
+      height: calc(50% + 20px);
+      border-style: solid;
+      border-color: #adadad;
+    }
 
-.rule-definition > .group {
-  margin: 0px;
-}
+    &::before {
+      top: -9px;
+      border-width: 0 0 2px 2px;
+    }
 
-.rule {
-  position: relative;
-  padding: 10px;
-  margin: 15px;
-  background-color: #ffffff;
-  border: 1px solid #c5e3c5;
+    &::after {
+      top: calc(50%);
+      border-width: 0 0 0 2px;
+    }
+
+    &:first-child::before {
+      top: -23px;
+      height: calc(50% + 40px);
+    }
+
+    &:last-child::before {
+      border-radius: 0 0 0 4px;
+    }
+
+    &:last-child::after {
+      display: none;
+    }
+  }
 }
 
 .rule-definition {
@@ -37,81 +113,17 @@
   min-height: 600px;
   background-color: white;
   border: 1px solid #b3b3b3;
-}
 
-.group .rule::after,
-.group .rule::before,
-.group-container .group::after,
-.group-container .group::before {
-  border-color: #adadad;
-}
+  > .group {
+    margin: 0;
 
-.group-container .group::after,
-.group-container .group::before {
-  content: '';
-  position: absolute;
-  left: -11px;
-  width: 9px;
-  height: calc(50% + 20px);
-  border-style: solid;
-}
-
-.group-container .group::before {
-  top: -9px;
-  border-width: 0 0 2px 2px;
-}
-
-.group-container .group::after {
-  top: calc(50%);
-  border-width: 0 0 0 2px;
-}
-
-.group-container .group:first-child::before {
-  top: -23px;
-  height: calc(50% + 40px);
-}
-
-.group-container .group:last-child::before {
-  border-radius: 0 0 0 4px;
-}
-
-.group-container .group:last-child::after {
-  display: none;
-}
-
-/**/
-
-.group .rule::after,
-.group .rule::before {
-  content: '';
-  position: absolute;
-  left: -16px;
-  width: 14px;
-  height: calc(50% + 14px);
-  border-style: solid;
-}
-
-.group .rule::before {
-  top: -13px;
-  border-width: 0 0 2px 2px;
-}
-
-.group .rule::after {
-  top: calc(50%);
-  border-width: 0 0 0 2px;
-}
-
-.group .rule:first-child::before {
-  top: -18px;
-  height: calc(50% + 20px);
-}
-
-.group .rule:last-child::before {
-  border-radius: 0 0 0 4px;
-}
-
-.group .rule:last-child::after {
-  display: none;
+    .options {
+      .remove-group,
+      .drag-handler {
+        display: none;
+      }
+    }
+  }
 }
 
 .options {
@@ -120,21 +132,5 @@
 }
 
 .body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-.group .dragging {
-  position: fixed;
-  opacity: 0.5;
-  z-index: 100;
-}
-
-.group .rule-placeholder {
-  position: relative;
-  margin: 4px 0;
-  border-radius: 5px;
-  padding: 5px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px dashed #bbb;
-  opacity: 0.7;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
