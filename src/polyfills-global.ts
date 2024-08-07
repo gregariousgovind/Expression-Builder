@@ -1,1 +1,1 @@
-(window as any).global = window;
+window.global = window;
