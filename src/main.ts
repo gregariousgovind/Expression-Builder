@@ -1,6 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
+import { bootstrapApplication } from '@angular/platform-browser';
 
 interface Rule {
   fact: string;
@@ -19,7 +20,7 @@ interface Group {
   templateUrl: './main.html',
   styleUrl: './main.scss',
   imports: [
-    BrowserModule,
+    CommonModule,
     FormsModule
   ],
 })
@@ -71,6 +72,12 @@ export class App {
 
   isGroup(rule: Rule | Group): rule is Group {
     return (rule as Group).rules !== undefined;
+  }
+
+  
+  generateRules() {
+    alert("check Console!");
+    console.log(this.group);
   }
 }
 

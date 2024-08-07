@@ -49,12 +49,6 @@
     }
   }
 
-  .dragging {
-    position: fixed;
-    opacity: 0.5;
-    z-index: 100;
-  }
-
   .rule-placeholder {
     position: relative;
     margin: 4px 0;
@@ -116,13 +110,6 @@
 
   > .group {
     margin: 0;
-
-    .options {
-      .remove-group,
-      .drag-handler {
-        display: none;
-      }
-    }
   }
 }
 

@@ -1,3 +1,5 @@
+<input type="button" value="generate Rule" (click)="generateRules()">
+
 <div class="rule-definition">
   <ng-container *ngTemplateOutlet="groupTemplate; context: { $implicit: group, parent: null, index: -1 }"></ng-container>
 </div>
@@ -13,11 +15,10 @@
         <input type="button" class="insert-group" value="Add Group" (click)="addGroup(group)">
         <input type="button" class="insert-rule" value="Add Rule" (click)="addRule(group)">
         <input *ngIf="parent" type="button" class="remove-group" value="Remove" (click)="removeRule(parent, index)">
-        <button class="drag-handler">↑↓</button>
       </div>
     </div>
     <div class="group-container">
-      <div *ngFor="let rule of group.rules; let i = index">
+      <ng-container *ngFor="let rule of group.rules; let i = index">
         <ng-container *ngIf="isGroup(rule); else ruleTemplate">
           <ng-container *ngTemplateOutlet="groupTemplate; context: { $implicit: rule, parent: group, index: i }"></ng-container>
         </ng-container>
@@ -29,10 +30,9 @@
             </select>
             <input type="text" [(ngModel)]="rule.value">
             <input type="button" value="remove" (click)="removeRule(group, i)">
-            <button class="drag-handler">↑↓</button>
           </div>
         </ng-template>
-      </div>
+      </ng-container>
     </div>
   </div>
 </ng-template>
