@@ -1,0 +1,89 @@
+<button (click)="generateRules()">Generate Rule</button>
+
+<div class="rule-definition">
+  <div class="group">
+    <div class="options">
+      <div class="option-absolute">
+        <select>
+          <option value="ALL">ALL</option>
+          <option value="ANY" selected>ANY</option>
+        </select>
+        <button (click)="addGroup($event)">Add Group</button>
+        <button (click)="addRule($event)">Add Rule</button>
+        <button (click)="removeGroup($event)">Remove</button>
+        <button class="drag-handler">↑↓</button>
+      </div>
+    </div>
+    <div class="group-container">
+      <div class="group">
+        <div class="options">
+          <div class="option-absolute">
+            <select>
+              <option value="ALL">ALL</option>
+              <option value="ANY" selected>ANY</option>
+            </select>
+            <button (click)="addGroup($event)">Add Group</button>
+            <button (click)="addRule($event)">Add Rule</button>
+            <button (click)="removeGroup($event)">Remove</button>
+            <button class="drag-handler">↑↓</button>
+          </div>
+        </div>
+        <div class="group-container">
+          <div class="group">
+            <div class="options">
+              <div class="option-absolute">
+                <select>
+                  <option value="ALL" selected>ALL</option>
+                  <option value="ANY">ANY</option>
+                </select>
+                <button (click)="addGroup($event)">Add Group</button>
+                <button (click)="addRule($event)">Add Rule</button>
+                <button (click)="removeGroup($event)">Remove</button>
+                <button class="drag-handler">↑↓</button>
+              </div>
+            </div>
+            <div class="group-container"></div>
+          </div>
+          <div class="rule">
+            FactName
+            <select class="dropdown">
+              <option>Operator</option>
+            </select>
+            <input type="text" value="Value" />
+            <button (click)="removeRule($event)">Remove</button>
+            <button class="drag-handler">↑↓</button>
+          </div>
+        </div>
+      </div>
+      <!-- Similar structure repeated for nested groups and rules -->
+    </div>
+  </div>
+</div>
+
+<!-- Group Template -->
+<div class="group-template" style="display: none">
+  <div class="options">
+    <div class="option-absolute">
+      <select>
+        <option value="ALL">ALL</option>
+        <option value="ANY">ANY</option>
+      </select>
+      <button (click)="addGroup($event)">Add Group</button>
+      <button (click)="addRule($event)">Add Rule</button>
+      <button (click)="removeGroup($event)">Remove</button>
+      <button class="drag-handler">↑↓</button>
+    </div>
+  </div>
+  <div class="group-container"></div>
+</div>
+
+<!-- Rule Template -->
+<div class="rule-template" style="display: none">
+  FactName
+  <select class="dropdown">
+    <option>Operator</option>
+  </select>
+  <input type="text" value="Value" />
+  <button (click)="removeRule($event)">Remove</button>
+  <button class="drag-handler">↑↓</button>
+</div>
