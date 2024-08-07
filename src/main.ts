@@ -10,7 +10,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
   styleUrl: './main.scss',
 })
 export class App implements OnInit {
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     this.initializeDragula();
