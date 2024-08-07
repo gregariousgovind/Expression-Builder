@@ -26,58 +26,58 @@ interface Group {
 })
 export class App {
   public group: Group = {
-    condition: 'ANY',
-    rules: [
-      {
-        condition: 'ALL',
-        rules: [
-          { fact: 'f1', operator: 'equals', value: 1 },
-          { fact: 'f1', operator: 'equals', value: 1 }
-        ]
-      },
-      {
-        condition: 'ANY',
-        rules: [
+      condition: 'ANY',
+      rules: [
           {
-            condition: 'ALL',
-            rules: [
-              { fact: 'f1', operator: 'equals', value: 1 },
-              { fact: 'f1', operator: 'equals', value: 1 }
-            ]
+              condition: 'ALL',
+              rules: [
+                  { fact: 'f1', operator: 'equals', value: 1 },
+                  { fact: 'f1', operator: 'equals', value: 1 }
+              ]
           },
-          { fact: 'f1', operator: 'equals', value: 1 }
-        ]
-      }
-    ]
+          {
+              condition: 'ANY',
+              rules: [
+                  {
+                      condition: 'ALL',
+                      rules: [
+                          { fact: 'f1', operator: 'equals', value: 1 },
+                          { fact: 'f1', operator: 'equals', value: 1 }
+                      ]
+                  },
+                  { fact: 'f1', operator: 'equals', value: 1 }
+              ]
+          }
+      ]
   };
 
   addGroup(group: Group) {
-    group.rules.push({
-      condition: 'ANY',
-      rules: []
-    });
+      group.rules.push({
+          condition: 'ANY',
+          rules: []
+      });
   }
 
   addRule(group: Group) {
-    group.rules.push({
-      fact: '',
-      operator: '',
-      value: ''
-    });
+      group.rules.push({
+          fact: '',
+          operator: '',
+          value: ''
+      });
   }
 
   removeRule(group: Group, index: number) {
-    group.rules.splice(index, 1);
+      group.rules.splice(index, 1);
   }
 
   isGroup(rule: Rule | Group): rule is Group {
-    return (rule as Group).rules !== undefined;
+      return (rule as Group).rules !== undefined;
   }
 
-  
+
   generateRules() {
-    alert("check Console!");
-    console.log(this.group);
+      alert("check Console!");
+      console.log(this.group);
   }
 }
 

@@ -8,10 +8,13 @@
   <div class="group">
     <div class="options">
       <div class="option-absolute">
-        <select [(ngModel)]="group.condition">
-          <option value="ALL">ALL</option>
-          <option value="ANY">ANY</option>
-        </select>
+        <div class="input-container select">
+          <select class="input-select" id="condition-type" [(ngModel)]="group.condition">
+            <option value="ALL">ALL</option>
+            <option value="ANY">ANY</option>
+          </select>
+          <label for="condition-type">Condition Type</label>
+        </div>
         <input type="button" class="insert-group" value="Add Group" (click)="addGroup(group)">
         <input type="button" class="insert-rule" value="Add Rule" (click)="addRule(group)">
         <input *ngIf="parent" type="button" class="remove-group" value="Remove" (click)="removeRule(parent, index)">
@@ -24,11 +27,16 @@
         </ng-container>
         <ng-template #ruleTemplate>
           <div class="rule">
-            FactName
-            <select [(ngModel)]="rule.operator">
-              <option>Operator</option>
-            </select>
-            <input type="text" [(ngModel)]="rule.value">
+            <div class="input-container select">
+              <select class="input-select" id="operator-name" [(ngModel)]="rule.operator">
+                <option>Operator</option>
+              </select>
+              <label for="operator-name">Rule Operator</label>
+            </div>
+            <div class="input-container text">
+              <input class="input-text" id="value" type="text" [(ngModel)]="rule.value" value=" "/>
+              <label for="value">Value</label>
+            </div>
             <input type="button" value="remove" (click)="removeRule(group, i)">
           </div>
         </ng-template>
